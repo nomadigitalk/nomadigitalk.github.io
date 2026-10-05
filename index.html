@@ -150,7 +150,23 @@ nav {
   transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--white); }
-.nav-cta { margin-left: 16px; }
+.nav-cta { margin-left: 16px; white-space: nowrap; }
+.nav-toggle {
+  display: none;
+  width: 40px; height: 40px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.nav-toggle span { display: block; width: 18px; height: 1.5px; background: var(--white); transition: transform 0.2s, opacity 0.2s; }
+nav.open .nav-toggle span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+nav.open .nav-toggle span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* ── HERO ── */
 #hero {
@@ -1041,7 +1057,24 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .container { padding: 0 24px; }
-  .nav-links { display: none; }
+  .nav-inner { padding: 0 24px; gap: 12px; }
+  .nav-wordmark { font-size: 15px; }
+  .nav-cta { margin-left: auto; padding: 10px 14px; font-size: 13px; }
+  .nav-toggle { display: flex; flex-shrink: 0; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 68px; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(10,10,10,0.97);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 24px 16px;
+  }
+  nav.open .nav-links { display: flex; }
+  .nav-links a { display: block; padding: 14px 0; font-size: 16px; border-bottom: 1px solid var(--border); }
+  .nav-links li:last-child a { border-bottom: none; }
   .services-grid { grid-template-columns: 1fr; }
   .service-card::after { display: none; }
   .service-card:nth-last-child(-n+2)::before { height: 1px; display: block; }
@@ -1092,6 +1125,9 @@ footer {
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <a href="#contacto" class="btn btn-primary nav-cta">Agenda llamada →</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -1597,10 +1633,10 @@ footer {
       <div class="footer-col">
         <h4>Servicios</h4>
         <ul class="footer-links">
-          <li><a href="#servicios">Digital Audit Pack</a></li>
-          <li><a href="#servicios">Business Automation</a></li>
-          <li><a href="#servicios">AI Sales System</a></li>
-          <li><a href="#servicios">Content Growth</a></li>
+          <li><a href="#servicios">Reportes &amp; Análisis IA</a></li>
+          <li><a href="#servicios">Automatización &amp; Sistemas IA</a></li>
+          <li><a href="#servicios">Presencia Digital</a></li>
+          <li><a href="#servicios">Crecimiento de Contenido</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1836,8 +1872,22 @@ document.querySelectorAll('.portfolio-card').forEach(card => {
   const link = card.querySelector('.portfolio-link');
 
   if (video) {
-    card.addEventListener('mouseenter', () => video.play());
-    card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+    // Frame de reposo: evita el rectángulo negro del primer cuadro
+    const REST = 1;
+    if (video.readyState >= 1) video.currentTime = REST;
+    else video.addEventListener('loadedmetadata', () => { video.currentTime = REST; }, { once: true });
+    if (window.matchMedia('(hover: hover)').matches) {
+      card.addEventListener('mouseenter', () => video.play().catch(() => {}));
+      card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = REST; });
+    } else {
+      // Sin mouse (celular): reproduce mientras la tarjeta está en pantalla
+      new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (en.isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        });
+      }, { threshold: 0.6 }).observe(card);
+    }
   }
 
   if (link) {
@@ -1848,6 +1898,17 @@ document.querySelectorAll('.portfolio-card').forEach(card => {
     });
   }
 });
+
+// Menú móvil
+const mobileNav = document.querySelector('nav');
+const mobileNavToggle = document.getElementById('navToggle');
+mobileNavToggle.addEventListener('click', () => {
+  const open = mobileNav.classList.toggle('open');
+  mobileNavToggle.setAttribute('aria-expanded', open);
+});
+document.querySelectorAll('.nav-links a').forEach(a =>
+  a.addEventListener('click', () => { mobileNav.classList.remove('open'); mobileNavToggle.setAttribute('aria-expanded', 'false'); })
+);
 
 // Smooth active nav on scroll
 const sections = document.querySelectorAll('section[id]');
