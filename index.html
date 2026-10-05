@@ -1616,6 +1616,8 @@ footer {
 
       <div class="contact-form">
         <form onsubmit="handleForm(event)">
+          <input type="hidden" name="_subject" value="Nueva consulta desde nomadigitalk.com">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
           <div class="form-row">
             <div class="form-group">
               <label>Nombre</label>
@@ -1893,22 +1895,29 @@ lenis.on('scroll', ({ scroll }) => {
 </script>
 
 <script>
-function handleForm(e) {
+async function handleForm(e) {
   e.preventDefault();
-  const d = new FormData(e.target);
-  const body = [
-    'Nombre: ' + (d.get('nombre') || ''),
-    'Email: ' + (d.get('email') || ''),
-    'Negocio: ' + (d.get('negocio') || ''),
-    'Servicio: ' + (d.get('servicio') || 'Sin especificar'),
-    '',
-    d.get('mensaje') || ''
-  ].join('\n');
-  const subject = 'Consulta web — ' + (d.get('nombre') || '');
-  window.location.href = 'mailto:nomadigitalk@gmail.com?subject=' +
-    encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  const btn = e.target.querySelector('.form-submit');
-  btn.textContent = 'Se abrió tu correo: pulsa enviar →';
+  const form = e.target;
+  const btn = form.querySelector('.form-submit');
+  const original = 'Enviar mensaje →';
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+  try {
+    const res = await fetch('https://formspree.io/f/xeaeqwzv', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    });
+    if (!res.ok) throw new Error(res.status);
+    form.reset();
+    btn.textContent = 'Mensaje enviado ✓ Te respondemos en 24h';
+    btn.style.background = '#16a34a';
+    setTimeout(() => { btn.textContent = original; btn.style.background = ''; btn.disabled = false; }, 6000);
+  } catch (err) {
+    btn.textContent = 'No se pudo enviar. Escríbenos por WhatsApp o email';
+    btn.style.background = '#b91c1c';
+    setTimeout(() => { btn.textContent = original; btn.style.background = ''; btn.disabled = false; }, 6000);
+  }
 }
 
 // Portfolio video hover play/pause + full card click
