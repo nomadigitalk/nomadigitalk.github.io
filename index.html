@@ -102,6 +102,21 @@ body {
 }
 .btn-ghost:hover { border-color: var(--violet); color: var(--violet); }
 
+.wa-float {
+  position: fixed;
+  right: 20px; bottom: 20px;
+  z-index: 90;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+.wa-float:hover { transform: scale(1.08); }
+
 /* ── NAV ── */
 nav {
   position: fixed;
@@ -606,6 +621,16 @@ section:nth-child(even) .portfolio-preview { background: var(--void); }
 .mock-ig-post:nth-child(1) { background: rgba(168,85,247,0.4); }
 .mock-ig-post:nth-child(5) { background: rgba(168,85,247,0.3); }
 .portfolio-info { padding: 24px; flex: 1; }
+.portfolio-badge {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--gray-mid);
+  letter-spacing: 1px;
+}
+.portfolio-badge.badge-real { border-color: var(--violet); color: var(--white); background: rgba(168,85,247,0.15); }
 .portfolio-cat {
   font-family: var(--mono);
   font-size: 10px;
@@ -1102,6 +1127,13 @@ footer {
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+<a href="https://wa.me/34694240546" target="_blank" rel="noopener" class="wa-float" aria-label="Escribinos por WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 2.5a7.5 7.5 0 0 0-6.4 11.4L2.5 17.5l3.7-1A7.5 7.5 0 1 0 10 2.5Z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M7.4 6.9c.3 2.6 2.1 4.6 4.9 5.4l1-1.1-1.6-1-.7.6c-.8-.4-1.5-1.1-1.9-1.9l.6-.7-.9-1.7-1.4.4Z" fill="#fff"/>
+  </svg>
+</a>
+
 <nav>
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
@@ -1152,8 +1184,8 @@ footer {
       </div>
       <div class="hero-stats">
         <div class="stat-item">
-          <span class="stat-num">10h+</span>
-          <span class="stat-label">Ahorradas por semana</span>
+          <span class="stat-num">1–5 días</span>
+          <span class="stat-label">Entrega de web o brand kit</span>
         </div>
         <div class="stat-item">
           <span class="stat-num">72h</span>
@@ -1199,8 +1231,8 @@ footer {
           <li>Auditoría de Negocio Digital Completa</li>
           <li>Prospección automatizada de clientes</li>
         </ul>
-        <div class="service-price">U$D100 – U$D500</div>
-        <div class="service-type">Proyecto único · Entrega en 72h</div>
+        <div class="service-price">Auditoría SEO 150 € <span style="font-size:14px;color:var(--gray-mid)">· precio fijo</span></div>
+        <div class="service-type">Auditoría digital completa desde 450 € · Entrega en 72h</div>
       </div>
 
       <!-- 02 · AUTOMATIZACIÓN & SISTEMAS IA -->
@@ -1227,8 +1259,8 @@ footer {
           <li>Asistente de IA entrenado con tus documentos</li>
           <li>Integración con tus herramientas actuales</li>
         </ul>
-        <div class="service-price">U$D100 – U$D3.000 <span style="font-size:14px;color:var(--gray-mid)">+ Mantenimiento/mes</span></div>
-        <div class="service-type">Implementación + mantenimiento mensual</div>
+        <div class="service-price">Desde 1.000 € <span style="font-size:14px;color:var(--gray-mid)">+ mantenimiento/mes</span></div>
+        <div class="service-type">A medida · Implementación + mantenimiento mensual</div>
       </div>
 
       <!-- 03 · PRESENCIA DIGITAL -->
@@ -1255,8 +1287,8 @@ footer {
           <li>Web desde Referencia (Benchmark)</li>
           <li>Web de Marca Personal desde Instagram</li>
         </ul>
-        <div class="service-price">U$D60 – U$D800</div>
-        <div class="service-type">Proyecto único · Entrega en 1–5 días</div>
+        <div class="service-price">Desde 150 €</div>
+        <div class="service-type">Brand kit desde 150 € · Web desde Instagram 290 € · Web a medida desde 450 € · Entrega en 1–5 días</div>
       </div>
 
       <!-- 04 · CRECIMIENTO DE CONTENIDO -->
@@ -1271,14 +1303,14 @@ footer {
           </svg>
         </span>
         <h3>Crecimiento de Contenido</h3>
-        <p>Estrategia de contenido viral con método probado. Ideas ganadoras, guiones listos para grabar y analítica mensual para escalar lo que funciona.</p>
+        <p>Estrategia de contenido viral con un método paso a paso. Ideas ganadoras, guiones listos para grabar y analítica mensual para escalar lo que funciona.</p>
         <ul class="service-includes">
           <li>Estrategia de contenido viral mensual</li>
           <li>Ideas ganadoras + guiones listos</li>
           <li>Formatos para Reels, Stories y Posts</li>
           <li>Analítica de resultados y optimización continua</li>
         </ul>
-        <div class="service-price">U$D150 – U$D700<span style="font-size:14px;color:var(--gray-mid)">/mes</span></div>
+        <div class="service-price">Desde 300 €<span style="font-size:14px;color:var(--gray-mid)">/mes</span></div>
         <div class="service-type">Recurrente mensual</div>
       </div>
 
@@ -1354,8 +1386,8 @@ footer {
   <div class="container">
     <div class="section-header">
       <span class="tag">03 — Portfolio</span>
-      <h2>Trabajos <span class="violet">reales</span>,<br>resultados medibles</h2>
-      <p>Demos y Proyectos para mostrar lo que podemos hacer. El mismo nivel de calidad que entregaríamos a cualquier cliente.</p>
+      <h2>Demos y casos:<br>así se ve lo que <span class="violet">entregamos</span></h2>
+      <p>Un caso real (JD Pro Painting &amp; Services, Florida) y demos con negocios ficticios. El mismo nivel de calidad que entregamos a cualquier cliente.</p>
     </div>
 
     <div class="portfolio-grid">
@@ -1367,9 +1399,9 @@ footer {
             <video class="preview-video" src="videos/reporte.mp4" muted loop playsinline preload="metadata" style="object-fit:contain; background:#000;"></video>
           </div>
           <div class="portfolio-info">
-            <div class="portfolio-cat">Diagnóstico · Analítica</div>
+            <div class="portfolio-cat"><span class="portfolio-badge badge-demo">Demo</span>Diagnóstico · Analítica</div>
             <h3>Reporte de Crecimiento</h3>
-            <p>Dashboard ejecutivo con métricas de crecimiento, análisis de canales y proyección de resultados. Diseño visual, datos reales.</p>
+            <p>Dashboard ejecutivo con métricas de crecimiento, análisis de canales y proyección de resultados. Diseño visual, datos de ejemplo.</p>
             <div class="portfolio-tags">
               <span class="portfolio-tag">Analítica</span>
               <span class="portfolio-tag">Dashboard</span>
@@ -1387,7 +1419,7 @@ footer {
             <video class="preview-video" src="videos/AuditoriaSEO.mp4" muted loop playsinline preload="metadata" style="object-fit:contain; background:#000;"></video>
           </div>
           <div class="portfolio-info">
-            <div class="portfolio-cat">SEO · Diagnóstico</div>
+            <div class="portfolio-cat"><span class="portfolio-badge badge-real">Caso real</span>SEO · Diagnóstico</div>
             <h3>Auditoría SEO</h3>
             <p>Revisión técnica de tu web para detectar errores que afectan tu posicionamiento en Google y definir mejoras prioritarias.</p>
             <div class="portfolio-tags">
@@ -1407,7 +1439,7 @@ footer {
             <video class="preview-video" src="videos/inkvault.mp4" muted loop playsinline preload="metadata" style="object-fit:contain; background:#000;"></video>
           </div>
           <div class="portfolio-info">
-            <div class="portfolio-cat">Web · Presencia Digital</div>
+            <div class="portfolio-cat"><span class="portfolio-badge badge-demo">Demo</span>Web · Presencia Digital</div>
             <h3>Página Web</h3>
             <p>Sitio web profesional diseñado para presentar tu negocio, generar confianza y convertir visitas en clientes.</p>
             <div class="portfolio-tags">
@@ -1427,7 +1459,7 @@ footer {
             <video class="preview-video" src="videos/BrandKit2.mp4" muted loop playsinline preload="metadata" style="object-fit:contain; background:#000;"></video>
           </div>
           <div class="portfolio-info">
-            <div class="portfolio-cat">Branding · Presencia Digital</div>
+            <div class="portfolio-cat"><span class="portfolio-badge badge-real">Caso real</span>Branding · Presencia Digital</div>
             <h3>Brand Kit de Marca</h3>
             <p>Sistema visual completo para que tu marca se vea profesional y mantenga coherencia en todos sus canales.</p>
             <div class="portfolio-tags">
@@ -1447,7 +1479,7 @@ footer {
             <video class="preview-video" src="videos/prospeccion.mp4" muted loop playsinline preload="metadata" style="object-fit:contain; background:#000;"></video>
           </div>
           <div class="portfolio-info">
-            <div class="portfolio-cat">IA · Automatización</div>
+            <div class="portfolio-cat"><span class="portfolio-badge badge-real">Caso real</span>IA · Automatización</div>
             <h3>Prospección de Clientes</h3>
             <p>Base de datos de clientes potenciales lista para contactar, con teléfono, mail, sitio web y mensaje personalizado para cada caso.</p>
             <div class="portfolio-tags">
@@ -1467,7 +1499,7 @@ footer {
             <video class="preview-video" src="videos/feed.mp4" muted loop playsinline preload="metadata"></video>
           </div>
           <div class="portfolio-info">
-            <div class="portfolio-cat">Contenido · Crecimiento</div>
+            <div class="portfolio-cat"><span class="portfolio-badge badge-demo">Demo</span>Contenido · Crecimiento</div>
             <h3>Feed de Instagram</h3>
             <p>Diseño y estrategia para que tu perfil comunique mejor tu marca y convierta visitas en oportunidades.</p>
             <div class="portfolio-tags">
@@ -1497,6 +1529,7 @@ footer {
         <p>NOMADIGITALK es una agencia especializada en aplicar inteligencia artificial y automatización a negocios que quieren crecer sin trabajar más horas.</p>
         <p>Combinamos marketing digital estratégico, automatización de procesos y desarrollo de agentes con IA. El resultado es un sistema que genera clientes, ahorra tiempo y escala sin depender del equipo.</p>
         <p>Trabajamos con negocios que facturan pero no crecen digitalmente, y con emprendedores que quieren construir su primer sistema de captación automatizado.</p>
+        <p>Fundada por Federico Suárez. NOMA, la modelo que ves en esta web, está creada íntegramente con IA: es nuestra forma de mostrar lo que hacemos.</p>
         <a href="#contacto" class="btn btn-ghost">Hablar con nosotros →</a>
       </div>
 
@@ -1554,6 +1587,18 @@ footer {
         <h2>Empecemos a<br><span class="violet">construir</span></h2>
         <p>Cuéntanos en qué estás trabajando. En 24h te respondemos con una propuesta inicial o agendamos una llamada de diagnóstico sin compromiso.</p>
         <div class="contact-channels">
+          <a href="https://wa.me/34694240546" target="_blank" rel="noopener" class="contact-channel">
+            <div class="channel-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2.5a7.5 7.5 0 0 0-6.4 11.4L2.5 17.5l3.7-1A7.5 7.5 0 1 0 10 2.5Z" stroke="#A855F7" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M7.4 6.9c.3 2.6 2.1 4.6 4.9 5.4l1-1.1-1.6-1-.7.6c-.8-.4-1.5-1.1-1.9-1.9l.6-.7-.9-1.7-1.4.4Z" fill="#A855F7"/>
+              </svg>
+            </div>
+            <div>
+              <div class="channel-label">WhatsApp</div>
+              <div class="channel-value">+34 694 240 546</div>
+            </div>
+          </a>
           <a href="mailto:nomadigitalk@gmail.com" class="contact-channel">
             <div class="channel-icon">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
